@@ -3,10 +3,19 @@
 **Status:** Design/demo only. Not an official Noll Pallet & Lumber website and not connected to a booking system.
 
 ## Preview
-Open `index.html` locally or through GitHub Pages once this branch is deployed:
-`https://barrservicesllc.github.io/barr-services-website-demos/demos/noll-container-rentals/`
+Check out `demo/noll-container-rentals` and open `demos/noll-container-rentals/index.html` in a browser. No build, package installation, or server is required. Keep `editorial.css` and the `assets/` directory beside the HTML. The operations concept is linked in the footer.
 
-The URL will work only if GitHub Pages is enabled and configured to publish the repository root; verify deployment settings before sharing as a live site.
+This is a draft-branch preview. The existing GitHub Pages URL may show the default branch, so it should not be shared as this revision until the branch is actually deployed.
+
+## Photographic design revision
+- Deep green, warm cream, and amber palette, editorial typography, split photographic hero, container-yard panorama, and responsive delivery section.
+- Two locally bundled, optimized WebP photographs derived from licensed Unsplash originals. Company names/logos and lettering are masked. Photo captions explicitly distinguish stock imagery from Noll inventory or facilities. See [ASSETS.md](ASSETS.md) for sources, license, and editing details.
+- Working size buttons populate the quote form; mobile navigation, native expandable FAQs, keyboard focus styles, and a skip link are included.
+- Phone, email, and business hours are visible editable placeholders. Pricing and availability remain subject to confirmation. The form only displays a local request preview.
+- Existing operations concept and future workflow roadmap are retained.
+
+## Browser verification for this revision
+Verified in headless Chromium at widths 1440, 1024, 768, 390, and 320 pixels: all local photos load, no horizontal page overflow, and no JavaScript page errors. Desktop and mobile full-page screenshots were visually reviewed. Exercised all four size buttons, mobile menu open/close, FAQ expansion, required form fields, and quote preview. HTML-looking form input remains plain text. Form preview sends no request, and the page makes no external network requests. Existing operations concept loads successfully. These checks cover the static demo; there is no production booking backend.
 
 ## What this demo includes
 - Responsive customer-facing landing page for portable steel storage container rentals.
