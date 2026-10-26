@@ -7,6 +7,12 @@ Check out `demo/noll-container-rentals` and open `demos/noll-container-rentals/i
 
 This is a draft-branch preview. The existing GitHub Pages URL may show the default branch, so it should not be shared as this revision until the branch is actually deployed.
 
+## Proposed advertising and physical promotion
+- [Visual advertising proposal](advertising/index.html): polished digital plan comparisons, campaign mockups and fully scoped physical-advertising add-on.
+- [Printable manager one-pager](advertising/print.html): simple option/price comparison with Print → Save as PDF.
+- [Scouting, fabrication and installation scope](advertising/README.md): project stages, separate costs and approval gates.
+- The proposal is public as a **demo** only; no campaign, prints, billboard space, physical installation, supplier outreach or spending has been approved.
+
 ## Photographic design revision
 - Deep green, warm cream, and amber palette, editorial typography, split photographic hero, container-yard panorama, and responsive delivery section.
 - Two locally bundled, optimized WebP photographs derived from licensed Unsplash originals. Company names/logos and lettering are masked. Photo captions explicitly distinguish stock imagery from Noll inventory or facilities. See [ASSETS.md](ASSETS.md) for sources, license, and editing details.
