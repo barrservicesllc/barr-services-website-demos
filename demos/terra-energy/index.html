@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#081523">
+<meta name="description" content="Terra Energy by Barr Services: an illustrative tour of read-only solar, battery, and load analysis and an evidence-first truth protocol.">
+<title>Terra Energy | Barr Services R&D Demo</title>
+<style>
+:root{color-scheme:dark;--bg:#081523;--card:#112236;--border:#284458;--text:#e9f4f4;--muted:#adc2c8;--teal:#69e3cc;--gold:#f9c978;--danger:#ff9e95}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(circle at 85% 0%,#153c4d 0,transparent 32%),linear-gradient(155deg,#06121f,#0b1b2a 60%,#091521);font:16px/1.6 system-ui,-apple-system,Segoe UI,Arial,sans-serif}a{color:var(--teal)}a:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:4px}.wrap{max-width:1140px;margin:auto;padding:0 24px}.top{border-bottom:1px solid #234154;background:#081523b0}.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:76px}.logo{font-size:.84rem;letter-spacing:.19em;font-weight:800;color:var(--teal);text-transform:uppercase}.top a{text-decoration:none}.back{font-size:.89rem;color:var(--muted)}.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:var(--teal)}.hero{padding:74px 0 42px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}.hero h1{font-size:clamp(3rem,6vw,5.5rem);line-height:1;letter-spacing:-.05em;margin:14px 0 8px}.hero h1 span{color:var(--teal)}h2{font-size:clamp(1.55rem,3vw,2.3rem);letter-spacing:-.03em;line-height:1.18;margin:.2em 0 .6em}.hero p{max-width:620px;color:var(--muted);font-size:1.07rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}.btn{display:inline-block;border-radius:12px;padding:12px 18px;background:var(--teal);color:#041725;font-weight:800;text-decoration:none;border:1px solid transparent}.btn.secondary{background:transparent;color:var(--teal);border-color:var(--border)}.orb{margin:auto;width:min(360px,90%);aspect-ratio:1;border-radius:50%;display:grid;place-content:center;text-align:center;border:1px solid #396777;box-shadow:0 0 0 22px #60ffe30a,0 0 0 56px #60ffe306,inset 0 0 70px #155367;background:radial-gradient(circle at center,#163a47,#0b1a29 68%)}.orb b{font-size:4.3rem;line-height:1.1;color:var(--teal)}.orb span{font-size:.82rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}.orb small{max-width:230px;color:var(--muted);margin:auto}.notice{padding:14px 18px;border:1px solid #80693e;background:#28281c;border-radius:12px;color:#ffe5b2;font-size:.93rem;margin-bottom:26px}.section{padding:30px 0 52px}.intro{max-width:790px;color:var(--muted)}.panel{background:#102236;border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 18px 40px #0002}.demohead{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}.choices{display:flex;gap:10px;flex-wrap:wrap}.choices button{padding:10px 14px;border-radius:999px;background:#081a2a;color:var(--muted);border:1px solid #456070;cursor:pointer;font:inherit;font-weight:700}.choices button[aria-pressed="true"]{background:var(--teal);color:#082027;border-color:var(--teal)}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.stat{background:#071a29;border:1px solid #244454;border-radius:12px;padding:18px}.stat span{display:block;font-size:.79rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.stat strong{display:block;font-size:2rem;line-height:1.3;letter-spacing:-.03em}.stat strong.bad{color:var(--danger)}.stat strong.good{color:var(--teal)}.chartbox{background:#071725;border:1px solid #294153;border-radius:14px;padding:14px}svg{display:block;width:100%;height:auto}.chartnote{font-size:.86rem;color:var(--muted);margin:6px 0 0}.legend{display:flex;gap:22px;flex-wrap:wrap;font-size:.87rem;color:var(--muted)}.key{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:8px;background:var(--teal)}.key.floor{background:var(--gold)}.result{padding:14px 0 0;color:#d9e9ee;font-size:1rem}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:25px 0}.feature{border:1px solid var(--border);background:#102236;border-radius:15px;padding:22px}.feature .num{font-size:.78rem;font-weight:800;letter-spacing:.15em;color:var(--teal)}.feature h3{font-size:1.12rem;margin:8px 0}.feature p{margin:0;color:var(--muted);font-size:.93rem}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:24px}.step{background:#11283a;padding:17px 14px;border-top:3px solid var(--teal);border-radius:8px;font-weight:750}.step span{display:block;font-size:.78rem;color:var(--muted);font-weight:450;margin-top:6px}.footer{padding:30px 0 60px;border-top:1px solid var(--border);color:var(--muted);font-size:.93rem}.footrow{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:45px}.orb{width:235px}.orb b{font-size:3.2rem}.cards{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.statgrid{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.panel{padding:17px}}@media(max-width:450px){.top .wrap{min-height:65px}.top .back{font-size:.76rem}.statgrid{grid-template-columns:1fr}.stat:last-child{grid-column:auto}.steps{grid-template-columns:1fr}.hero h1{font-size:3.2rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="../../index.html">Barr Services / R&amp;D</a><a class="back" href="../../index.html">← Back to portfolio</a></div></header>
+<main class="wrap">
+<section class="hero">
+  <div>
+    <div class="eyebrow">Independent energy research · Public concept demo</div>
+    <h1>Terra <span>Energy.</span></h1>
+    <p class="eyebrow" style="color:var(--gold)">Math meets matter.</p>
+    <h2>See the reserve boundary before you cross it.</h2>
+    <p>Explore the idea behind an evidence-first, read-only system for solar production, building load and battery reserves. Find the boundary, ask what would change it, and compare future predictions with measured reality.</p>
+    <div class="actions"><a class="btn" href="#explore">Explore example</a><a class="btn secondary" href="mailto:barrservicesllc@gmail.com?subject=Terra%20Energy%20private%20beta%20inquiry">Ask about private beta</a></div>
+  </div>
+  <div class="orb" aria-label="Terra Energy read-only demonstration emblem"><span>TRUTH LEDGER</span><b>◉</b><small>Predict → freeze → measure → compare</small></div>
+</section>
+<p class="notice" role="note"><strong>Public showcase, not a live solver.</strong> The example numbers and curves below are illustrative UI data, not engine results, measured site telemetry, performance proof or a prediction. This site does not accept CSVs, credentials or control equipment.</p>
+<section class="section" id="explore">
+  <div class="eyebrow">01 / Explore</div><h2>What a reserve-boundary analysis looks like</h2>
+  <p class="intro">Switch between two fictional battery-state examples. The graphic shows why a trajectory and a reserve floor tell a clearer story than a single status number. These values are local, illustrative, and never sent to a server.</p>
+  <div class="panel">
+    <div class="demohead"><div><span class="eyebrow">Illustrative battery state of charge</span><h3 style="margin:6px 0">A day in the life of a battery</h3></div><div class="choices" aria-label="Choose an example"><button type="button" id="exampleA" aria-pressed="true">Solar-friendly day</button><button type="button" id="exampleB" aria-pressed="false">Heavy evening load</button></div></div>
+    <div class="statgrid" aria-live="polite">
+      <div class="stat"><span>Example minimum SOC</span><strong id="minSoc">—</strong></div>
+      <div class="stat"><span>Example reserve margin</span><strong id="margin">—</strong></div>
+      <div class="stat"><span>Example first crossing</span><strong id="crossing">—</strong></div>
+    </div>
+    <div class="chartbox"><svg id="chart" viewBox="0 0 720 320" role="img" aria-label="Illustrative battery state of charge across a day, compared with a 20 percent reserve floor">
+      <g stroke="#2d4354" stroke-width="1"><line x1="52" y1="24" x2="696" y2="24"/><line x1="52" y1="92" x2="696" y2="92"/><line x1="52" y1="160" x2="696" y2="160"/><line x1="52" y1="228" x2="696" y2="228"/><line x1="52" y1="296" x2="696" y2="296"/></g>
+      <g font-size="13" fill="#b9cbd2" font-family="system-ui, sans-serif"><text x="8" y="29">100%</text><text x="19" y="97">75%</text><text x="19" y="165">50%</text><text x="19" y="233">25%</text><text x="29" y="301">0%</text><text x="50" y="316">06:00</text><text x="292" y="316">12:00</text><text x="534" y="316">18:00</text><text x="654" y="316">22:00</text></g>
+      <line id="floorLine" x1="52" x2="696" y1="241.6" y2="241.6" stroke="#f9c978" stroke-width="2" stroke-dasharray="8 7"/>
+      <polyline id="exampleLine" points="" stroke="#69e3cc" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+    </svg><div class="legend"><span><i class="key"></i> Fictional battery SOC</span><span><i class="key floor"></i> 20% example reserve floor</span></div><p class="chartnote">Fixed fictional values, displayed on-device. Not generated by the private Terra Energy model.</p></div>
+    <p id="exampleResult" class="result" role="status"></p>
+  </div>
+</section>
+<section class="section">
+  <div class="eyebrow">02 / Intended analysis</div><h2>From telemetry to useful questions</h2>
+  <div class="cards">
+    <article class="feature"><div class="num">CAPABILITY 01</div><h3>Find reserve boundaries</h3><p>Use timestamped production, load and battery telemetry to estimate when a declared reserve could be crossed. Keep measured and inferred data distinct.</p></article>
+    <article class="feature"><div class="num">CAPABILITY 02</div><h3>Ask “what would change it?”</h3><p>Test transparent alternatives, such as added usable storage or reduced constant load. An explanatory counterfactual is not a recommendation to operate equipment.</p></article>
+    <article class="feature"><div class="num">CAPABILITY 03</div><h3>Make predictions accountable</h3><p>Freeze model assumptions and prediction receipts before observing future outcomes. Compare with actual measurements and publish errors, including misses.</p></article>
+  </div>
+</section>
+<section class="section">
+  <div class="eyebrow">03 / Evidence standard</div><h2>Reality gets the final vote.</h2>
+  <p class="intro">Software tests and synthetic demonstrations establish implementation behavior, not physical validation. Terra Energy's truth protocol calls for precommitted predictions followed by measured-outcome comparisons, explicit error metrics and independent review.</p>
+  <div class="steps">
+    <div class="step">01 · Declare<span>Record data sources, units, system assumptions and model version.</span></div>
+    <div class="step">02 · Predict<span>Create a testable prediction for a future physical window.</span></div>
+    <div class="step">03 · Freeze<span>Preserve a cryptographic receipt before seeing the outcome.</span></div>
+    <div class="step">04 · Measure<span>Collect actual observations; report missing data.</span></div>
+    <div class="step">05 · Compare<span>Report errors and revise transparently on unseen data.</span></div>
+  </div>
+  <div class="actions"><a class="btn" href="mailto:barrservicesllc@gmail.com?subject=Terra%20Energy%20pilot%20discussion">Discuss a research pilot</a></div>
+</section>
+</main>
+<footer class="footer"><div class="wrap footrow"><div><strong>Terra Energy</strong> · Barr Services research concept<br>Read-only analysis. No equipment control. No physical performance claims made by this showcase.</div><div><a href="../../index.html">Portfolio</a> · <a href="mailto:barrservicesllc@gmail.com">Contact</a></div></div></footer>
+<script>
+(function () {
+  "use strict";
+  // Illustrative UI fixture only. Deliberately no network, credentials, CSV handling or private engine.
+  const examples = [
+    { label: "Solar-friendly day", values: [62, 64, 69, 72, 68, 60, 48, 36, 27] },
+    { label: "Heavy evening load", values: [58, 54, 51, 44, 33, 23, 17, 14, 12] }
+  ];
+  const reserve = 20;
+  const floorY = 296 - 272 * reserve / 100;
+  const svg = document.getElementById("chart");
+  const buttons = [document.getElementById("exampleA"), document.getElementById("exampleB")];
+  document.getElementById("floorLine").setAttribute("y1", String(floorY));
+  document.getElementById("floorLine").setAttribute("y2", String(floorY));
+  function render(index) {
+    const sample = examples[index];
+    const values = sample.values;
+    const minimum = Math.min.apply(null, values);
+    const margin = minimum - reserve;
+    const first = values.findIndex(function (value) { return value < reserve; });
+    const time = first === -1 ? "None" : String(6 + first * 2).padStart(2, "0") + ":00";
+    const points = values.map(function (value, i) {
+      return (52 + i * 80.5).toFixed(1) + "," + (296 - value * 2.72).toFixed(1);
+    }).join(" ");
+    document.getElementById("exampleLine").setAttribute("points", points);
+    document.getElementById("minSoc").textContent = minimum + "%";
+    document.getElementById("margin").textContent = (margin >= 0 ? "+" : "") + margin + " pts";
+    document.getElementById("crossing").textContent = time;
+    document.getElementById("margin").className = margin >= 0 ? "good" : "bad";
+    document.getElementById("exampleResult").textContent = first === -1
+      ? "In this fictional example, the battery stays above a 20% floor. The smallest illustrative margin is " + margin + " percentage points."
+      : "In this fictional example, the battery drops below a 20% floor at " + time + ". A real analysis would need time-aligned telemetry, declared assumptions and later measurement to validate a prediction.";
+    svg.setAttribute("aria-label", sample.label + ": fictional state of charge from 06:00 to 22:00, minimum " + minimum + " percent, 20 percent reserve floor.");
+    buttons.forEach(function (button, i) { button.setAttribute("aria-pressed", String(i === index)); });
+  }
+  buttons.forEach(function (button, index) { button.addEventListener("click", function () { render(index); }); });
+  render(0);
+})();
+</script>
+</body>
+</html>
