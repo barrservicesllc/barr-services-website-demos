@@ -19,7 +19,7 @@ header{background:rgba(4,17,21,.98);color:#f4f6f5;border-color:#24363a;box-shado
 .btn.dark{background:#091a20;color:#fff;box-shadow:0 4px 0 #7f531f}.btn.dark:hover{background:#1a3741}
 .btn.outline{border:2px solid #ffbd64;background:#04151990;color:#fff;box-shadow:none}.btn.outline:hover{background:#ffbd64;color:#081419}
 .hero{min-height:680px;background:radial-gradient(circle at 74% 45%,#344243 0,#10252b 40%,#061216 85%);isolation:isolate;color:#fff;overflow:hidden}
-.hero:before{content:"";position:absolute;z-index:-2;inset:0;background:linear-gradient(90deg,#051318fd 0%,#051318df 43%,#08151c70 100%),url('assets/container-yard.webp') center 45%/cover no-repeat}
+.hero:before{content:"";position:absolute;z-index:-2;inset:0;background:linear-gradient(90deg,#051318fd 0%,#051318df 43%,#08151c70 100%),url('assets/noll-branded-delivery.webp') center 47%/cover no-repeat}
 .hero:after{content:"";z-index:-1;pointer-events:none;position:absolute;right:-250px;top:-120px;width:720px;height:720px;border:1px solid #ffb95533;transform:rotate(15deg)}
 .hero>.wrap{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(24px,3.7vw,60px);align-items:center;padding:72px 0 68px}
 .hero-inner{padding:0;max-width:none;min-width:0}
@@ -46,9 +46,9 @@ h2{font-family:"Arial Black",Impact,"Arial Narrow",Arial,sans-serif;text-transfo
 .section-head p{font-size:14px;line-height:1.7}
 .cards{gap:13px;border:0;grid-template-columns:repeat(4,minmax(0,1fr))}
 .card{background:#0b2025;color:#fff;position:relative;min-height:325px;overflow:hidden;border:1px solid #3d5658;isolation:isolate;padding:26px 22px;transition:transform .2s,box-shadow .2s}
-.card:before{content:"";position:absolute;inset:0;z-index:-2;background:url('assets/container-doors.webp') center/cover;filter:saturate(.7) contrast(1.15)}
-.card:nth-child(2):before{background-image:url('assets/container-yard.webp');background-position:45% center}
-.card:nth-child(3):before{background-image:url('assets/container-yard.webp');background-position:78% center}
+.card:before{content:"";position:absolute;inset:0;z-index:-2;background:url('assets/noll-brand-hero.webp') center/cover;filter:saturate(.7) contrast(1.15)}
+.card:nth-child(2):before{background-image:url('assets/noll-branded-delivery.webp');background-position:60% center}
+.card:nth-child(3):before{background-image:url('assets/noll-brand-hero.webp');background-position:75% center}
 .card:nth-child(4):before{background-position:75% center}
 .card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#041114a9,#081c1cb0 42%,#031217f7 100%)}
 .card:hover{transform:translateY(-5px);border-color:#f8b558;box-shadow:0 18px 42px #07191a31}
@@ -82,7 +82,7 @@ h2{font-family:"Arial Black",Impact,"Arial Narrow",Arial,sans-serif;text-transfo
 .step .n{color:#f6bd67}.step h3{font-family:"Arial Black",Impact,Arial,sans-serif;text-transform:uppercase;font-weight:900;font-size:23px}
 .step p{font-size:13px}
 .brand-statement{position:relative;isolation:isolate;background:#0d2125;color:#fff;min-height:345px;display:flex;align-items:center}
-.brand-statement:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#071517f9 0%,#071517e3 47%,#0715175a),url('assets/container-yard.webp') center 54%/cover}
+.brand-statement:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#071517f9 0%,#071517e3 47%,#0715175a),url('assets/noll-branded-delivery.webp') center 50%/cover}
 .brand-statement .wrap{padding:68px 0}
 .brand-statement p{font-weight:850;text-transform:uppercase;color:#ffbd63;letter-spacing:.16em;font-size:12px}
 .brand-statement h2{color:white;font-size:clamp(43px,6vw,86px);max-width:870px;margin:12px 0 24px}
@@ -101,3 +101,11 @@ h2{font-family:"Arial Black",Impact,"Arial Narrow",Arial,sans-serif;text-transfo
 @media(max-width:680px){.wrap{width:calc(100% - 28px)}html{scroll-padding-top:72px}.nav{min-height:68px}.brand{font-size:19px}.brandmark{height:38px;width:42px;font-size:9px}.brand small{font-size:8px}.links{top:68px;background:#091a1f;border-color:#395050;color:white}.links a{color:#fff}.menu{color:#ffca75;border-color:#ffca75}.hero{min-height:auto}.hero>.wrap{display:flex;flex-direction:column;align-items:stretch;gap:31px;padding:55px 0 36px}.hero h1{font-size:clamp(48px,12vw,77px)}.hero .lead{font-size:15px;line-height:1.65}.hero .eyebrow{font-size:11px}.hero-visual{margin:0 10px 0 0}.hero-visual img{height:295px;min-height:0}.hero-visual:after{top:11px;right:0;font-size:8px}.photo-ticket{left:-7px;bottom:45px;padding:13px 15px}.photo-ticket strong{font-size:19px}.photo-label{margin-top:22px;font-size:9px}.hero-notes{font-size:10px;margin-top:25px}.trustbar .wrap{gap:10px}.trustbar div{font-size:10px}.section{padding:65px 0}.cards,.sizegrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:21px 15px;min-height:275px}.card h3{font-size:18px}.card p{font-size:11px}.card a{font-size:10px}.sizecard{padding:15px 12px;min-height:302px}.sizecard .feet{font-size:36px}.sizecard:before{height:30px;margin-bottom:20px}.sizecard:nth-child(4):before{height:40px}.sizecard h3{font-size:14px}.sizecard p{font-size:11px}.size-pick{font-size:10px}.container-panorama{height:190px;border-width:3px}.photo-panel{min-height:335px;order:0}.photo-panel .sticker{font-size:19px;left:0}.brand-statement{min-height:320px}.brand-statement .wrap{padding:55px 0}.brand-statement h2{font-size:clamp(40px,10vw,63px)}.quote-form{padding:22px 18px}.footer{padding-bottom:88px}.mobile-quote-link{display:flex;position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:14px;right:14px;z-index:19;align-items:center;justify-content:center;padding:13px 15px;background:#f6b954;color:#07171a;text-decoration:none;font-weight:950;font-size:12px;text-transform:uppercase;letter-spacing:.06em;box-shadow:0 10px 30px #0007;border:1px solid #ffde96}.mobile-quote-link[hidden]{display:none}}
 @media(max-width:350px){.cards{grid-template-columns:1fr}.card{min-height:240px}.sizegrid{gap:7px}.sizecard{padding:12px 9px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.card,.sizecard{transition:none!important}.btn:hover,.card:hover,.sizecard:hover{transform:none}}
+
+/* Generated image integration: original AI concept artwork, not verified Noll property. */
+.hero-visual img{object-position:48% 47%;filter:contrast(1.06) saturate(1.06)}
+.photo-panel>img{object-position:47% 50%;filter:contrast(1.05) saturate(1.04)}
+.container-panorama img{object-position:center 53%;filter:contrast(1.08) saturate(1.03)}
+.card:nth-child(4):before{background-image:url('assets/noll-branded-delivery.webp');background-position:51% center}
+.photo-label span:last-child{color:#ffdc9c;font-weight:800}
+@media(max-width:680px){.hero-visual img{object-position:50% center}.container-panorama img{object-position:50% 52%}}
