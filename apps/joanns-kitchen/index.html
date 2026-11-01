@@ -415,10 +415,20 @@ $("#form").addEventListener("submit", e => {
 
 // ---------- backup ----------
 $("#exportBtn").onclick = async () => {
-  const dl = await window.claude?.use?.("downloads").catch(()=>null);
-  if (!dl){ toast("Saving files isn't available here"); return; }
-  try { await dl.save({filename:`joanns-kitchen-backup-${new Date().toISOString().slice(0,10)}.json`, data:JSON.stringify({app:"joanns-kitchen",version:1,recipes},null,1)}); toast("Backup saved"); }
-  catch { toast("Backup not saved"); }
+  const filename="joanns-kitchen-backup-"+new Date().toISOString().slice(0,10)+".json";
+  const data=JSON.stringify({app:"joanns-kitchen",version:1,recipes},null,2);
+  try {
+    // Preserve host-managed downloads when available, but work in ordinary browsers too.
+    let dl=null;
+    if (window.claude?.use) dl=await window.claude.use("downloads").catch(()=>null);
+    if (dl){ await dl.save({filename,data}); toast("Backup saved"); return; }
+    const blob=new Blob([data],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    toast("Backup download started");
+  } catch { toast("Backup not saved"); }
 };
 $("#importFile").onchange = async e => {
   const f = e.target.files[0]; e.target.value=""; if (!f) return;
