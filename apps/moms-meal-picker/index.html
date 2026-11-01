@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mom's Meal Picker</title>
+<style>
+  :root{
+    --bg:#fff8ee; --card:#ffffff; --ink:#2e2a25; --muted:#766f66;
+    --accent:#d76a3d; --accent2:#f2b84b; --ok:#3f7d5a; --border:#eadfce;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+  .wrap{max-width:760px;margin:auto;padding:18px}
+  h1{font-size:clamp(28px,7vw,46px);margin:8px 0 4px}
+  .sub{color:var(--muted);font-size:17px;margin-bottom:18px}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:18px;box-shadow:0 8px 30px rgba(70,50,20,.06)}
+  .row{display:flex;gap:10px}
+  input{flex:1;min-width:0;font-size:18px;padding:15px 16px;border:2px solid var(--border);border-radius:14px;outline:none}
+  input:focus{border-color:var(--accent2)}
+  button{border:0;border-radius:14px;padding:14px 17px;font-weight:800;font-size:16px;cursor:pointer}
+  .add{background:var(--accent2);color:#33250d}
+  .go{width:100%;margin-top:16px;background:var(--accent);color:#fff;font-size:20px;padding:17px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px;min-height:16px}
+  .chip{background:#fff1d4;border:1px solid #efcf8b;border-radius:999px;padding:9px 12px;font-weight:700}
+  .chip span{margin-left:7px;color:#916d27}
+  .tiny{font-size:13px;color:var(--muted);margin-top:9px}
+  .category-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+  .category-row label{font-weight:800}
+  .category-row select{flex:1;min-width:170px;border:2px solid var(--border);border-radius:12px;padding:12px 14px;background:#fff;color:var(--ink);font:inherit}
+  .category-row select:focus{outline:2px solid var(--accent2);outline-offset:2px}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px;gap:10px}
+  .secondary{background:#f3eadf;color:#544b41}
+  .results{display:grid;gap:12px}
+  .meal{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px}
+  .meal h3{margin:0 0 6px;font-size:22px}
+  .meta{color:var(--muted);font-size:14px;margin-bottom:10px}
+  .uses{font-weight:700;color:var(--ok);margin-bottom:8px}
+  .missing{font-weight:700;color:#a85b25;margin-bottom:8px}
+  .section{margin:10px 0 2px;padding:8px 4px 2px;font-size:18px}
+  .badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:900;margin-left:8px;vertical-align:2px;background:#eef7f1;color:var(--ok)}
+  .badge.almost{background:#fff0dc;color:#9a5d20}
+  .score{color:var(--muted);font-size:13px;margin-bottom:8px}
+  details{border-top:1px dashed var(--border);padding-top:10px}
+  summary{cursor:pointer;font-weight:800}
+  ol{padding-left:22px}
+  .empty{padding:24px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:18px}
+  .footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🍳 Mom's Meal Picker</h1>
+  <div class="sub">Tell me what you have. I’ll only show meals you can make with it.</div>
+
+  <div class="panel">
+    <div class="row">
+      <input id="ingredient" placeholder="Type an ingredient… e.g. eggs" autocomplete="off">
+      <button class="add" id="addBtn">+ Add</button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="tiny">Tap an ingredient to remove it. Your list stays saved on this device.</div>
+    <div class="category-row">
+      <label for="category">Recipe category</label>
+      <select id="category" aria-label="Recipe category">
+        <option value="all">All recipes</option>
+        <option value="Casserole">Casserole</option>
+      </select>
+    </div>
+    <button class="go" id="goBtn">SHOW ME MEALS</button>
+  </div>
+
+  <div class="toolbar">
+    <strong id="resultTitle">Meals</strong>
+    <button class="secondary" id="clearBtn">Clear ingredients</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="empty">Add a few ingredients, then tap <b>SHOW ME MEALS</b>.</div>
+  </div>
+
+  <div class="footer">Simple on purpose. Season, spice, and customize however you like. ❤️</div>
+</div>
+
+<script>
+const recipes = [
+  // Casserole starter recipes (replace or extend with family favorites)
+  {name:"Chicken & Rice Casserole",category:"Casserole",time:"45 min",need:["chicken","rice","broth","cheese"],optional:["broccoli","salt","pepper"],steps:["Preheat oven to 375°F (190°C).","Cook the rice and chicken first; make sure the chicken reaches 165°F (74°C).","Combine cooked rice, chicken, broth, cheese, and any optional vegetables in a baking dish.","Bake for 20–25 minutes until hot and bubbling."]},
+  {name:"Broccoli & Cheese Rice Casserole",category:"Casserole",time:"35 min",need:["broccoli","rice","cheese","milk"],optional:["butter","salt","pepper"],steps:["Preheat oven to 375°F (190°C).","Cook rice and steam broccoli until nearly tender.","Mix rice, broccoli, milk and most of the cheese in a baking dish; sprinkle remaining cheese on top.","Bake for 20–25 minutes until bubbling and golden."]},
+  {name:"Beef & Potato Casserole",category:"Casserole",time:"55 min",need:["beef","potato","cheese"],optional:["broth","salt","pepper"],steps:["Preheat oven to 375°F (190°C).","Brown the beef and drain excess fat; thinly slice or dice the potatoes.","Layer beef, potatoes and cheese in a baking dish with a splash of broth or water; cover tightly.","Bake about 35–45 minutes or until the potatoes are tender and the beef is thoroughly cooked; uncover briefly to brown the top."]},
+  // Chicken
+  {name:"BBQ Chicken",time:"20 min",need:["chicken","bbq sauce"],optional:["salt","pepper","cayenne pepper","cilantro"],steps:["Season chicken.","Cook until fully done.","Brush or toss with BBQ sauce.","Finish with any optional seasonings you have."]},
+  {name:"Chicken & Broccoli Skillet",time:"22 min",need:["chicken","broccoli"],optional:["salt","pepper","broth","cayenne pepper"],steps:["Cut chicken and broccoli into bite-size pieces.","Cook chicken through in a skillet.","Add broccoli and a splash of broth or water if available.","Season and cook until broccoli is tender."]},
+  {name:"Chicken & Corn Skillet",time:"18 min",need:["chicken","corn"],optional:["salt","pepper","cayenne pepper","cilantro"],steps:["Cook chicken pieces until done.","Add corn and heat through.","Season to taste.","Finish with cilantro if you have it."]},
+  {name:"Chicken & Potato Skillet",time:"28 min",need:["chicken","potato"],optional:["salt","pepper","broth","cayenne pepper"],steps:["Dice potato small and begin cooking in a covered skillet with a splash of broth or water.","Add chicken and cook through.","Uncover and brown lightly.","Season to taste."]},
+  {name:"Chicken Vegetable Soup",time:"30 min",need:["chicken","broth"],optional:["carrots","corn","broccoli","potato","salt","pepper","cilantro","cayenne pepper"],steps:["Bring broth to a simmer.","Add chicken and firm vegetables such as potato or carrots first.","Add quicker-cooking vegetables later.","Simmer until chicken is cooked and vegetables are tender; season to taste."]},
+  {name:"Chicken Potato Soup",time:"30 min",need:["chicken","potato","broth"],optional:["carrots","corn","salt","pepper","cilantro"],steps:["Simmer diced potato in broth until nearly tender.","Add chicken and cook through.","Add any other vegetables you have.","Season and serve."]},
+  {name:"BBQ Chicken & Corn",time:"20 min",need:["chicken","bbq sauce","corn"],optional:["pepper","cayenne pepper","cilantro"],steps:["Cook chicken through.","Add corn and warm it.","Stir in BBQ sauce.","Finish with pepper, cayenne, or cilantro if desired."]},
+  {name:"BBQ Chicken & Potatoes",time:"30 min",need:["chicken","bbq sauce","potato"],optional:["salt","pepper","cayenne pepper"],steps:["Dice and cook potatoes until tender and browned.","Cook chicken through.","Combine with BBQ sauce.","Season to taste."]},
+  {name:"Spicy Chicken & Broccoli",time:"22 min",need:["chicken","broccoli","cayenne pepper"],optional:["salt","pepper","broth","cilantro"],steps:["Cook chicken in a skillet.","Add broccoli with a small splash of broth or water.","Season carefully with cayenne.","Cook until broccoli is tender."]},
+  {name:"Chicken Veggie Broth Bowl",time:"25 min",need:["chicken","broth"],optional:["broccoli","carrots","corn","potato","cilantro","pepper"],steps:["Heat broth.","Add chicken and your available vegetables.","Simmer until everything is cooked through.","Taste and season."]},
+  // Beef
+  {name:"BBQ Beef Skillet",time:"15 min",need:["beef","bbq sauce"],optional:["salt","pepper","cayenne pepper","cilantro"],steps:["Cook beef until done.","Drain excess fat if needed.","Stir in BBQ sauce.","Season to taste."]},
+  {name:"Beef & Broccoli",time:"20 min",need:["beef","broccoli"],optional:["salt","pepper","broth","cayenne pepper"],steps:["Cook beef in a skillet.","Add broccoli and a splash of broth or water.","Cover briefly until broccoli is tender.","Season and serve."]},
+  {name:"Beef & Corn Skillet",time:"15 min",need:["beef","corn"],optional:["salt","pepper","cayenne pepper","cilantro"],steps:["Brown beef.","Add corn and heat through.","Season to taste.","Finish with cilantro if desired."]},
+  {name:"Beef & Potato Hash",time:"28 min",need:["beef","potato"],optional:["salt","pepper","cayenne pepper"],steps:["Dice potato small and cook until nearly tender.","Add beef and brown until done.","Let the edges crisp.","Season to taste."]},
+  {name:"Beef Vegetable Soup",time:"35 min",need:["beef","broth"],optional:["carrots","corn","broccoli","potato","salt","pepper","cayenne pepper"],steps:["Brown beef if desired.","Add broth and firm vegetables.","Simmer until vegetables are tender.","Add quick-cooking vegetables and season."]},
+  {name:"Beef Potato Soup",time:"35 min",need:["beef","potato","broth"],optional:["carrots","corn","salt","pepper"],steps:["Brown beef.","Add broth and diced potato.","Simmer until potato is tender.","Add any extra vegetables and season."]},
+  {name:"BBQ Beef & Corn",time:"17 min",need:["beef","bbq sauce","corn"],optional:["pepper","cayenne pepper","cilantro"],steps:["Cook beef until done.","Add corn.","Stir in BBQ sauce.","Season or garnish as desired."]},
+  {name:"BBQ Beef & Potatoes",time:"30 min",need:["beef","bbq sauce","potato"],optional:["salt","pepper","cayenne pepper"],steps:["Cook diced potatoes until tender and browned.","Cook beef through.","Combine with BBQ sauce.","Season to taste."]},
+  {name:"Spicy Beef & Broccoli",time:"20 min",need:["beef","broccoli","cayenne pepper"],optional:["salt","pepper","broth"],steps:["Cook beef.","Add broccoli and a splash of broth or water.","Season lightly with cayenne.","Cook until broccoli is tender."]},
+  {name:"Beef Veggie Broth Bowl",time:"30 min",need:["beef","broth"],optional:["broccoli","carrots","corn","potato","pepper"],steps:["Heat broth and beef together.","Add available vegetables, starting with the firmest.","Simmer until tender.","Season and serve."]},
+  // Vegetable / sides
+  {name:"Broccoli & Corn Bowl",time:"12 min",need:["broccoli","corn"],optional:["salt","pepper","cayenne pepper","broth"],steps:["Cook broccoli until tender-crisp.","Add corn and warm through.","Season to taste."]},
+  {name:"Broccoli & Carrots",time:"15 min",need:["broccoli","carrots"],optional:["salt","pepper","broth","cayenne pepper"],steps:["Start carrots first with a splash of broth or water.","Add broccoli once carrots begin to soften.","Cook until tender.","Season to taste."]},
+  {name:"Corn & Carrot Broth Bowl",time:"15 min",need:["corn","carrots","broth"],optional:["salt","pepper","cilantro","cayenne pepper"],steps:["Simmer carrots in broth until tender.","Add corn and warm through.","Season and garnish if desired."]},
+  {name:"Simple Vegetable Soup",time:"25 min",need:["broth"],optional:["potato","carrots","corn","broccoli","salt","pepper","cilantro","cayenne pepper"],minOptional:2,steps:["Bring broth to a simmer.","Add the firmest vegetables first.","Add tender vegetables later.","Season and simmer until everything is tender."]},
+  {name:"Potato & Carrot Soup",time:"25 min",need:["potato","carrots","broth"],optional:["corn","broccoli","salt","pepper"],steps:["Dice potato and carrots.","Simmer in broth until tender.","Add any extra vegetables near the end.","Season to taste."]},
+  {name:"Broccoli Potato Soup",time:"25 min",need:["broccoli","potato","broth"],optional:["carrots","corn","salt","pepper"],steps:["Simmer diced potato in broth until nearly tender.","Add broccoli.","Cook until both are tender.","Season to taste."]},
+  {name:"Spicy Vegetable Soup",time:"25 min",need:["broth","cayenne pepper"],optional:["potato","carrots","corn","broccoli","salt","pepper","cilantro"],minOptional:2,steps:["Simmer available vegetables in broth.","Add cayenne a little at a time.","Season to taste.","Finish with cilantro if available."]},
+  {name:"Cilantro Vegetable Broth Bowl",time:"20 min",need:["broth","cilantro"],optional:["corn","carrots","broccoli","potato","pepper"],minOptional:1,steps:["Simmer available vegetables in broth.","Add cilantro near the end.","Season and serve hot."]},
+  {name:"Peppery Potatoes",time:"22 min",need:["potato","pepper"],optional:["salt","cayenne pepper","broth"],steps:["Dice potatoes.","Cook with a splash of broth or water until tender.","Let them brown if using a skillet.","Season generously with pepper."]},
+  {name:"Spicy Corn",time:"8 min",need:["corn","cayenne pepper"],optional:["salt","pepper","cilantro"],steps:["Heat corn.","Add a small pinch of cayenne.","Season to taste.","Top with cilantro if desired."]},
+  // Other staples retained for future pantry entries
+  {name:"Chicken & Rice Bowl",time:"15 min",need:["chicken","rice"],optional:["broccoli","corn","salt","pepper"],steps:["Cook or warm chicken.","Cook or warm rice.","Combine and season."]},
+  {name:"Egg Fried Rice",time:"12 min",need:["rice","eggs"],optional:["oil","pepper","corn"],steps:["Warm rice in a skillet.","Scramble eggs into the rice.","Add any vegetables you have.","Season to taste."]},
+  {name:"Cheesy Scrambled Eggs",time:"8 min",need:["eggs","cheese"],optional:["butter","salt","pepper"],steps:["Beat eggs.","Cook gently in a pan.","Add cheese near the end."]},
+  {name:"Eggs on Toast",time:"10 min",need:["eggs","bread"],optional:["butter","salt","pepper"],steps:["Toast bread.","Cook eggs however you like.","Serve eggs on toast."]},
+  {name:"Grilled Cheese",time:"10 min",need:["bread","cheese"],optional:["butter"],steps:["Put cheese between bread slices.","Cook in a skillet until golden and melted."]},
+  {name:"Quesadilla",time:"10 min",need:["tortilla","cheese"],optional:["butter","chicken","beef"],steps:["Fill tortilla with cheese and any cooked meat you want.","Fold and cook until crisp and melted."]},
+  {name:"Simple Pasta & Cheese",time:"15 min",need:["pasta","cheese"],optional:["butter","pepper"],steps:["Cook pasta and drain.","Stir in cheese and any butter you have.","Season to taste."]}
+];
+
+const aliases = {
+  "egg":"eggs","cheddar":"cheese","american cheese":"cheese","mozzarella":"cheese",
+  "white bread":"bread","wheat bread":"bread","toast":"bread",
+  "chicken breast":"chicken","chicken breasts":"chicken","chiken":"chicken","chiken breast":"chicken","chiken breasts":"chicken","rotisserie chicken":"chicken",
+  "ground beef":"beef","hamburger":"beef","steak":"beef",
+  "potatoes":"potato","tomatoes":"tomato","tortillas":"tortilla",
+  "carrot":"carrots","sweet corn":"corn","corn kernels":"corn",
+  "chicken broth":"broth","beef broth":"broth","vegetable broth":"broth","stock":"broth",
+  "bell pepper":"pepper","black pepper":"pepper","cayenne":"cayenne pepper",
+  "barbecue sauce":"bbq sauce","barbeque sauce":"bbq sauce",
+  "oatmeal":"oats","olive oil":"oil","vegetable oil":"oil"
+};
+
+let pantry = JSON.parse(localStorage.getItem("mealPickerIngredients") || "[]").map(norm);
+pantry = [...new Set(pantry)];
+
+function norm(s){
+  s = String(s||"").trim().toLowerCase();
+  s = s.replace(/^\s*\d+(?:[./]\d+)?\s*(?:x|lbs?|pounds?|oz|ounces?|g|kg|cups?|cans?|packages?|pkgs?)?\s*/i, "");
+  s = s.replace(/\s+/g, " ").trim();
+  if (aliases[s]) return aliases[s];
+  if (s.endsWith("s") && aliases[s.slice(0,-1)]) return aliases[s.slice(0,-1)];
+  return s;
+}
+function save(){ localStorage.setItem("mealPickerIngredients", JSON.stringify(pantry)); }
+function renderChips(){
+  const el=document.getElementById("chips"); el.innerHTML="";
+  pantry.forEach((item,i)=>{ const b=document.createElement("button"); b.className="chip"; b.innerHTML=item+"<span>×</span>"; b.onclick=()=>{pantry.splice(i,1);save();renderChips();}; el.appendChild(b); });
+}
+function addIngredient(){
+  const input=document.getElementById("ingredient"); const v=norm(input.value);
+  if(v && !pantry.includes(v)){pantry.push(v);save();renderChips();}
+  input.value=""; input.focus();
+}
+function evaluate(r){
+  const need=r.need.map(norm), optional=(r.optional||[]).map(norm);
+  const missing=need.filter(x=>!pantry.includes(x));
+  const usedRequired=need.filter(x=>pantry.includes(x));
+  const usedOptional=optional.filter(x=>pantry.includes(x));
+  const used=[...new Set([...usedRequired,...usedOptional])];
+  const minOptional=r.minOptional||0;
+  const optionalEnough=usedOptional.length>=minOptional;
+  const canMake=missing.length===0 && optionalEnough;
+  // If a flexible recipe needs optional produce, show the shortage cleanly.
+  const flexibleShortfall=Math.max(0,minOptional-usedOptional.length);
+  return {...r,need,optional,missing,used,usedOptional,canMake,flexibleShortfall,score:used.length*10+need.length};
+}
+function mealCard(r,almost=false){
+  const missingText=[...r.missing];
+  if(r.flexibleShortfall) missingText.push(`${r.flexibleShortfall} more vegetable${r.flexibleShortfall===1?'':'s'}`);
+  return `<div class="meal">
+    <h3>${r.name}<span class="badge ${almost?'almost':''}">${almost?'ALMOST':'MAKE NOW'}</span></h3>
+    <div class="meta">⏱ ${r.time}</div>
+    <div class="uses">Uses from your pantry: ${r.used.length?r.used.join(', '):'—'}</div>
+    ${almost?`<div class="missing">Missing: ${missingText.join(', ')}</div>`:''}
+    <div class="score">Uses ${r.used.length} thing${r.used.length===1?'':'s'} you already have</div>
+    <details><summary>How to make it</summary><ol>${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol></details>
+  </div>`;
+}
+function showMeals(){
+  const category=document.getElementById("category").value;
+  const selected=recipes.filter(r=>category==="all" || r.category===category);
+  const evaluated=selected.map(evaluate);
+  const makeNow=evaluated.filter(r=>r.canMake).sort((a,b)=>b.used.length-a.used.length || b.need.length-a.need.length || a.name.localeCompare(b.name));
+  const almost=evaluated.filter(r=>!r.canMake && (r.missing.length+r.flexibleShortfall)===1 && r.used.length>0)
+    .sort((a,b)=>b.used.length-a.used.length || a.name.localeCompare(b.name));
+  const box=document.getElementById("results");
+  const categoryLabel=category==="all" ? "meals" : category.toLowerCase()+" recipes";
+  document.getElementById("resultTitle").textContent = makeNow.length ? `${makeNow.length} ${categoryLabel} you can make now` : (category==="all" ? "Meals" : category+" recipes");
+  if(!pantry.length){ box.innerHTML='<div class="empty">Add a few ingredients, then tap <b>SHOW ME MEALS</b>.</div>'; return; }
+  if(!makeNow.length && !almost.length){ box.innerHTML='<div class="empty">No matches in this category yet. Try adding another ingredient to your pantry.</div>'; return; }
+  let html='';
+  if(makeNow.length){ html += `<div class="section"><strong>✅ Make now</strong> — ranked to use the most of what you have</div>` + makeNow.map(r=>mealCard(r,false)).join(''); }
+  if(almost.length){ html += `<div class="section"><strong>🛒 Almost</strong> — missing only one thing</div>` + almost.slice(0,12).map(r=>mealCard(r,true)).join(''); }
+  box.innerHTML=html;
+}
+document.getElementById("addBtn").onclick=addIngredient;
+document.getElementById("goBtn").onclick=showMeals;
+document.getElementById("category").addEventListener("change",showMeals);
+document.getElementById("clearBtn").onclick=()=>{ pantry=[];save();renderChips();document.getElementById("results").innerHTML='<div class="empty">Add a few ingredients, then tap <b>SHOW ME MEALS</b>.</div>';document.getElementById("resultTitle").textContent="Meals";};
+document.getElementById("ingredient").addEventListener("keydown",e=>{if(e.key==="Enter")addIngredient();});
+renderChips();
+</script>
+</body>
+</html>
